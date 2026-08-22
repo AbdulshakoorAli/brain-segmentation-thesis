@@ -30,3 +30,8 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
+
+# Data 
+data/raw/
+data/derived/
+

@@ -7,12 +7,12 @@
 - Official collection URL: https://dataverse.harvard.edu/dataverse/mindboggle101
 - OSF primary-repository URL: https://osf.io/nhtur/
 - Project data page: https://mindboggle.info/data
-- Planned local raw-data location: `data/raw/mindboggle-101/` (not populated)
-- Retrieval date: not applicable; no data have been downloaded
+- Observed local raw-data location: `data/raw/mindboggle101/` (24 files; archives remain unextracted)
+- Retrieval date: unverified; downloaded files were present when inspected on 2026-08-23
 
 ## Version status
 
-The project data page reports Mindboggle-101 data, code, and documents as version 3, updated 2019-04-03. This is the upstream-reported status, not a locally verified package version. The current file inventory, per-file versions, checksums, and bundled change/license notices remain unverified until an approved acquisition is inspected.
+The project data page reports Mindboggle-101 data, code, and documents as version 3, updated 2019-04-03. The Harvard Dataverse API for the Individuals DOI reports dataset version 2 with 24 files. The local filenames and byte sizes match that Dataverse v2 listing exactly, but equivalence between Dataverse v2 and the OSF/project-level v3 designation is unverified. Local SHA-256 checksums are recorded in `metadata/raw_file_inventory.csv`.
 
 ## Phase 1A scope
 
@@ -22,7 +22,7 @@ The manual DKT volume is reference segmentation, not a model prediction. MRI/lab
 
 ## Licensing status and unresolved checks
 
-Licensing is unresolved and requires human review before acquisition or use. The following checks are blocked until the exact package and its bundled notices are available:
+Licensing is unresolved and requires human review before data use. No standalone license or terms file appears in either the local 24-file set or the Harvard Dataverse v2 file listing. The following checks remain blocked:
 
 - reconcile the repository-level license metadata with the project page's general Creative Commons statement and any component-specific notices;
 - confirm the license version and terms for every in-scope T1 MRI and DKT label component;
@@ -34,4 +34,4 @@ No permissive interpretation is adopted while these sources remain unreconciled.
 
 ## Source verification record
 
-URLs and the upstream version statement were checked on 2026-08-22 against the repository-local Mindboggle reference and the public Mindboggle data page. Raw-data contents, file inventory, package identity, and bundled licensing evidence are unverified because the dataset has not been downloaded.
+URLs and the project-level upstream version statement were checked on 2026-08-22. On 2026-08-23, the observed local set was compared with the Harvard Dataverse API: all 24 filenames and byte sizes matched its dataset-version-2 listing. Exact OSF v3 equivalence, retrieval date, source hierarchy, and bundled licensing evidence remain unverified. See `docs/raw_dataset_organization_report.md`.
