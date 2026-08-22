@@ -1,0 +1,32 @@
+# Raw neuroimaging data and downloaded dataset packages
+data/raw/**
+*.nii
+*.nii.gz
+*.mgh
+*.mgz
+*.tar
+*.tar.gz
+*.tgz
+
+# Derived data and caches
+data/derived/**
+data/cache/**
+derived/**
+cache/**
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Local operating-system and editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

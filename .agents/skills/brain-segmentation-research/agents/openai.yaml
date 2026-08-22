@@ -1,0 +1,14 @@
+interface:
+  display_name: Brain Segmentation Research
+  short_description: Build reproducible brain MRI research workflows
+  default_prompt: Use $brain-segmentation-research to inspect the project state and
+    complete the next validated research milestone.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

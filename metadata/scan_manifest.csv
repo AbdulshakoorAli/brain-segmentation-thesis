@@ -1,0 +1,1 @@
+scan_id,participant_id,cohort,source_subject_id,mri_path,label_path,space,image_dim_x,image_dim_y,image_dim_z,label_dim_x,label_dim_y,label_dim_z,image_spacing_x,image_spacing_y,image_spacing_z,label_spacing_x,label_spacing_y,label_spacing_z,image_orientation,label_orientation,affine_match,label_ids_present,validation_status,exclusion_reason
