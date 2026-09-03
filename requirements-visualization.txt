@@ -1,2 +1,5 @@
 -r requirements-qc.txt
 matplotlib==3.10.7
+plotly==7.0.0
+scikit-image==0.26.0
+streamlit==1.62.0

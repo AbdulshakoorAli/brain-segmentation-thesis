@@ -5,10 +5,16 @@
 - Objective: Build a reproducible foundation for brain MRI segmentation research using Mindboggle-101 T1 MRI and manual DKT cortical labels.
 - Dataset and version: Mindboggle-101 individual brains; 24 local files match the Harvard Dataverse v2 filename/size listing, while the project page reports OSF/project v3 (2019-04-03); equivalence is unverified.
 - Current phase: Phase 1A — Dataset foundation and visualization pre-MVP.
-- Current milestone: The manifest-driven Mindboggle-101 viewer passes its scoped technical milestone, supports all 202 verified pairs, and is ready for local human research use; split creation remains deferred.
-- Last updated: 2026-08-30.
+- Current milestone: The interactive 3D professor-demonstration MVP for the accepted Extra-18 `Afterthought-1` native MRI/manual-DKT31 pair passes scoped technical validation and awaits professor review; split policy, preprocessing, and training remain explicitly deferred.
+- Last updated: 2026-08-31.
 
 ## Completed
+
+- 2026-09-02 — Manifest-driven, on-demand Mindboggle-101 3D viewer passed its scoped technical milestone: all 202 verified canonical IDs are selectable, exactly 10 representative pair caches were generated/reused, and the remaining 192 records stay on-demand only.
+- General Streamlit application and cache layer created — `apps/mindboggle101_3d_viewer.py`, `src/brain_segmentation/streamlit_3d_viewer.py`, `src/brain_segmentation/mesh_cache.py`, and `launch_mindboggle101_3d_viewer.cmd`.
+- The original Afterthought entry point and launcher now redirect compatibly to the shared general implementation; the 249-file accepted Afterthought cache remains unchanged and opens immediately.
+- All ten representatives passed source validation, 62/62 foreground-region mesh coverage, finite/valid geometry, independent affine checks, hemisphere/region controls, three-plane rendering, and cached reload; stale, incomplete, deterministic-repeat, app-health, launcher, and preservation checks passed.
+- Validation evidence, report, log, and eight screenshots created under `data/derived/qc/`, `reports/phase1a/`, and `research_log/`.
 
 - Repository instructions created — `AGENTS.md`.
 - Source, scope, upstream version status, and licensing questions recorded — `docs/dataset_source_and_license.md`.
@@ -64,10 +70,21 @@
 - Anatomical-plane handling generalized — `src/brain_segmentation/visualization.py` derives axial/coronal/sagittal axes from each record's orientation metadata without reorienting source arrays; all six observed orientation codes are supported.
 - Mindboggle viewer smoke evidence created — `data/derived/qc/mindboggle101_viewer_smoke_validation.json` records exactly one deterministic native and MNI152 pair per cohort, 10 passed and 0 failed.
 - Manifest-driven viewer report and research record created — `reports/phase1a/mindboggle101_viewer_report.md` and `research_log/phase-1a-mindboggle101-viewer.md`.
+- Focused visual-acceptance evidence created — `data/derived/qc/mindboggle101_visual_acceptance.json`, `reports/phase1a/mindboggle101_visual_acceptance_report.md`, and `research_log/phase-1a-visual-acceptance.md`.
+- Afterthought-1 diagnostics created — MRI-only, label-only, overlay, and five-nearby-slice screenshots plus three required combined usability screenshots under `reports/phase1a/screenshots/visual_acceptance/`.
+- Reproducible acceptance runner created — `scripts/run_mindboggle101_visual_acceptance.py` measures source support and display transforms without changing the accepted loader/viewer or NIfTI inputs.
+- Participant-grouped split-policy proposal created — `reports/phase1a/mindboggle101_split_policy_proposal.md` documents the evidence, proposed 70/15/16 subject-record targets, cohort-balance targets, group-integrity hierarchy, seed, external-overlap constraints, and required future audit without assigning any split.
+- Split-policy initiating prompt and evidence recorded — `research_log/phase-1a-split-policy-review.md`.
+- Single-record 3D mesh/rendering support created — `src/brain_segmentation/mesh_visualization.py` derives original-ID manual-DKT31 surfaces and reuses accepted 2D orientation logic without changing source arrays.
+- Local Streamlit professor demo created — `apps/afterthought1_3d_professor_demo.py` provides orbit/zoom, hemisphere, region, opacity, slice, display-mode, metadata, label-name, and manual-reference controls for Afterthought-1 native only.
+- Derived Afterthought-1 meshes created — 62 regions, 608,797 full-resolution vertices, 1,237,714 full-resolution faces, and coherent step-2 display surfaces under `data/derived/visualization/afterthought1_native_dkt31_meshes/`.
+- Windows one-click launcher created and validated — `launch_afterthought1_3d_demo.cmd` starts the local Streamlit application from the project virtual environment.
+- Professor-demo build, validation, report, and research record created — `scripts/build_afterthought1_3d_professor_demo.py`, `scripts/validate_afterthought1_3d_professor_demo.py`, `data/derived/qc/afterthought1_3d_demo_validation.json`, `reports/phase1a/afterthought1_3d_professor_demo_report.md`, and `research_log/phase-1a-afterthought1-3d-professor-demo.md`.
+- Five representative professor-demo screenshots created under `reports/phase1a/screenshots/afterthought1_3d_professor_demo/`.
 
 ## In progress
 
-- None. The scoped manifest-driven viewer implementation and smoke validation are complete; human usability review is next.
+- Professor visual/usability review of the technically validated all-record local viewer is pending. Phase 1A is not complete.
 
 ## Blocked
 
@@ -75,7 +92,7 @@
 - Package/component license reconciliation — no standalone license notice is present in the local or Dataverse v2 24-file listing; human review is required.
 - Source-directory fidelity — Dataverse supplies no directory labels and the OSF hierarchy was unavailable, so the local category-folder layout cannot be proven identical to the acquisition source.
 - NKI participant grouping is resolved, but NKI acquisition/session roles and exact cross-cohort acquisition relationships remain unverified; OASIS-2/OASIS-3 row-level overlap is also unverified.
-- Leakage-safe train/validation/test assignments — require verified grouping lineage and are outside this milestone.
+- Leakage-safe train/validation/test assignments — participant grouping evidence is available, but generation awaits explicit human approval of the proposed scientific policy.
 
 ## Decisions
 
@@ -124,10 +141,28 @@
 - 2026-08-30 — Define anatomical planes from each observed NIfTI orientation (`ASL`, `LAS`, `LIA`, `PIR`, `RAS`, `RPS`) while retaining the original voxel array and affine unchanged.
 - 2026-08-30 — Limit practical general-viewer validation to exactly 10 records: the deterministic minimum canonical pair in native and MNI152 space for every observed cohort.
 - 2026-08-30 — Add no dependency for the general viewer; reuse existing Matplotlib and standard-library Tk 8.6.
+- 2026-08-30 — Attribute the Afterthought-1 slice-89 appearance to the distributed source pair: MRI/label transforms are identical, every labeled voxel has nonzero moderate-intensity MRI support, and fragmentation exists in the original arrays.
+- 2026-08-30 — Make no visualization correction because no display bug was observed; retain the accepted viewer and earlier screenshots unchanged.
+- 2026-08-30 — Accept focused human usability using exactly Afterthought-1 native LAS, deterministic Colin27-1 native RAS, and deterministic Afterthought-1 MNI152 LAS evidence, while documenting source-display heterogeneity.
+- 2026-08-31 — Do not approve or generate dataset splits; defer the proposed 70/15/16 targets, cohort matrix, seed, tie-breaking, and coordinate-space policy until after professor visualization review.
+- 2026-08-31 — Make the single-record Afterthought-1 native Streamlit 3D professor demonstration the active milestone; preprocessing, training, inference, evaluation, and meshes for the other 201 records remain out of scope.
+- 2026-08-31 — Add Streamlit 1.62.0, Plotly 7.0.0, and scikit-image 0.26.0 as the only direct 3D-demo dependencies; retain the accepted NumPy, NiBabel, Pytest, and Matplotlib pins.
+- 2026-08-31 — Preserve full step-1 marching-cubes meshes and use coherent step-2 derived display meshes for browser responsiveness; background remains unmeshed and all vertices use the accepted native affine.
+- 2026-08-31 — Treat all displayed DKT31 surfaces as manual reference derivatives, never model predictions or clinical surfaces.
+- 2026-09-02 — Support all 202 verified pairs through manifest-derived selectors, but generate meshes only after explicit local user action; retain exactly ten representative caches from this validation and leave the other 192 uncached.
+- 2026-09-02 — Bind new mesh caches to canonical identity, relative source label path/hash, affine, observed IDs, dictionary, full/display algorithms and parameters, and code/schema versions; publish only validated cache directories atomically.
+- 2026-09-02 — Preserve the accepted Afterthought cache through legacy provenance validation rather than rewriting it, and use one shared application for both general and compatibility entry points.
+- 2026-09-02 — Keep split policy, preprocessing, training, inference, evaluation, public deployment, and Phase 1A completion explicitly deferred.
 
 ## Validation
 
 ### Passed
+
+- All-record 3D selector audit — 202/202 verified unique IDs are selectable: Extra-18 36, MMRR-21 42, NKI-RS-22 44, NKI-TRT-20 40, OASIS-TRT-20 40; exactly 101 native and 101 MNI152; no invalid/unverified row offered.
+- Representative 3D audit — exactly 10 records (one native and one MNI152 per cohort) passed read-only loading, 62-region coverage, finite vertices, valid triangular faces, recorded world bounds, independent affine reconstruction, hemisphere/region controls, three-plane rendering, raw preservation, and cached reload.
+- Cache audit — accepted Afterthought cache reused unchanged; nine caches generated atomically; synthetic stale identity rejected; synthetic incomplete cache detected/recovered outside accepted caches; one non-Afterthought repeat generation was byte-identical.
+- General application audit — Streamlit selector transition completed with zero exceptions, local health returned HTTP 200/`ok`, generic and compatible launchers passed, and the existing automated suite passed 8/8.
+- All-record viewer preservation — before/after bundle hashes matched for raw archives, manifests, accepted QC and lineage CSVs, dictionary, accepted loader/2D logic, and the complete legacy Afterthought cache.
 
 - Proposed CSV schemas — exact expected headers, unique columns, successful parsing, and 0 invented data rows at initialization.
 - Phase 1A directory/ignore protections — required directories exist; raw neuroimaging, derived/cache, and Python-cache patterns are ignored.
@@ -182,17 +217,35 @@
 - Manifest viewer smoke validation — exactly 10/10 selected pairs passed loading, essential scientific checks, three-plane rendering, controls, color/transparency, label lookup, and before/after NIfTI hashing; 0 failed and 0 smoke screenshots were created.
 - Manifest viewer orientation/error handling — all six observed orientation codes produced valid anatomical-axis mappings; an invalid canonical ID returned a clear error and exit code 2 without an unhandled crash.
 - Manifest viewer regression/preservation — existing QC tests passed 8/8 once; all 47 accepted preservation-baseline files and the 20 selected source NIfTIs remained unchanged.
+- Focused sagittal transformation audit — slice 89 uses voxel axis 0, identical `transpose(1,0)`, no rotation/flip, matching origin/extents/aspect/interpolation, and exact expected MRI/label display arrays.
+- Focused source-support audit — full-volume MRI/label nonzero counts are 1,157,182/434,509 and slice-89 counts are 6,040/1,720; both have 0 label voxels on zero MRI (0.0%).
+- Focused cause assessment — label-supported slice-89 MRI values span 49–201 on the unchanged 0–281 window, and original label-component counts peak at 64 on slice 89 versus 16/24/27/15 nearby; source-pair morphology, not display logic or faint-tissue windowing, explains the appearance.
+- Focused usability acceptance — all required selectors, pair updates, plane sliders, opacity isolation, display modes, label lookup, invalid-ID recovery, colors/transparency, and manual-reference notice checks passed for the three required records.
+- Focused visual preservation — no dependency or accepted viewer-code change was made; selected NIfTI hashes matched before and after and the accepted artifact baseline remained unchanged.
+- Split-policy evidence audit — the accepted subject, scan-space, and participant-group inputs parse as 101, 202, and 99 rows; 97 groups have one included record, two shared NKI groups have two, and 61 groups carry repeat/counterpart constraints.
+- Split-policy scope control — the `splits/` directory remains empty and no participant, subject, or canonical pair was assigned.
+- Afterthought-1 3D mesh audit — 62/62 observed foreground IDs, 31 per hemisphere, and all 434,509 foreground label voxels map to valid finite triangular surfaces; unknown IDs and background meshes are 0.
+- Professor-demo interaction audit — Plotly orbit/scroll zoom, original-ID/name hover, hemisphere and region filtering, 3D/2D opacity, all anatomical slice sliders, and MRI-only/label-only/overlay modes passed.
+- Streamlit and launcher audit — focused AppTest completed with 0 exceptions, the local server returned HTTP 200 / `ok`, and the Windows one-click launcher validation returned code 0.
+- Professor-demo determinism/regression — two complete generations produced 255 byte-identical artifacts; existing automated tests passed 8/8.
+- Professor-demo preservation — selected raw NIfTI hashes and accepted loader, 2D viewer, manifests, dictionaries, QC, lineage, grouping, and archive artifacts remained unchanged; split files and other-record mesh directories remain 0.
 
 ### Failed
 
-- None for the five scoped cohort checkpoints, global consolidation checkpoint, Extra-18 visualization pre-MVP, or manifest-driven viewer milestone.
+- None for the five scoped cohort checkpoints, global consolidation checkpoint, Extra-18 visualization pre-MVP, manifest-driven 2D viewer, focused visual acceptance, split-policy evidence review, Afterthought-1 3D demo, or all-record on-demand 3D viewer technical validation.
 
 ### Skipped
 
+- Pre-generation of the remaining 192 verified 3D caches, exhaustive 202-record rendering, public deployment, and target-classroom device testing were intentionally skipped.
+
 - Extra-18 full-head T1 and `manual+aseg` auxiliary files.
-- Exhaustive rendering of the remaining 192 verified records, per-smoke-record screenshots, extensive synthetic loader tests, global split assignment, preprocessing, training, inference, quantitative model evaluation, and 3D surface reconstruction.
+- Exhaustive focused visual review of the remaining 199 verified records, extensive synthetic loader tests, global split assignment, preprocessing, training, inference, quantitative model evaluation, and 3D surface reconstruction.
+- Deterministic split allocation and leakage audit were intentionally skipped pending human policy approval.
+- Mesh generation for the other 201 canonical rows, 3D MRI volume rendering, preprocessing, training, inference, quantitative evaluation, and clinical validation were intentionally skipped.
 
 ### Unverified
+
+- Professor usability and performance on the target presentation computer, browser, display, and GPU for the all-record on-demand viewer.
 
 - Harvard Dataverse v2 versus OSF/project v3 equivalence.
 - Exact source-directory fidelity.
@@ -205,12 +258,16 @@
 - Independent MNI152 template provenance beyond distributed filenames and observed within-pair geometry.
 - Scientific and clinical validity.
 - Human selector usability across different monitor, DPI, and Matplotlib/Tk backend configurations.
+- Focused visual alignment of the other 199 canonical records; this milestone intentionally reviewed exactly three records.
+- Whether the proposed 70/15/16 ratio, cohort target matrix, seed `20260831`, and MNI152-first modeling recommendation match the final thesis design.
+- Professor usability and presentation quality on the target classroom display, GPU, and browser; technical headless/local-server validation does not substitute for that review.
 
 ### Blocked
 
 - Package/component licensing reconciliation requires human review.
-- Phase transition and licensing decisions require human review; dataset splitting remains deferred.
+- Phase transition, split-policy approval, and licensing decisions require human review; dataset splitting remains deferred.
+- Phase 1A completion is not claimed; professor feedback and subsequent explicit user authorization are required before selecting another milestone.
 
 ## Next milestone
 
-- Conduct a short human usability review on a graphical workstation: check selector flow, one non-LAS native record, one LAS MNI152 record, label lookup, controls, and recoverable error messaging. Record acceptance or requested interface changes before authorizing another milestone.
+- Launch `launch_mindboggle101_3d_viewer.cmd` for a bounded professor walkthrough using the cached default and one cross-cohort/native-or-MNI selection, then record usability and scientific-display feedback. Do not generate splits, revisit split approval, or claim Phase 1A completion during that review.
